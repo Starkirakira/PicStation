@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: path.join(__dirname, 'src', 'index'),
-  watch: true,
   output: {
     path: path.join(__dirname, 'dist'),
     publicPath: '/dist/',
@@ -35,7 +34,7 @@ module.exports = {
       use: ['style-loader','css-loader'],
     },
     {
-      test: /\.(png|jpg|jpeg|gif|svg)&/,
+      test: /\.(png|jpg|jpeg|gif|svg)$/,
       type: 'asset/resource',
     }
   ]
@@ -50,8 +49,8 @@ module.exports = {
   ],
   devtool: 'source-map',
   devServer: {
-    contentBase: path.join(__dirname, '/dist/'),
-    inline: true,
+    static: path.join(__dirname, '/dist/'),
+    compress: true,
     host: 'localhost',
     port: 8080,
   }
