@@ -15,23 +15,53 @@ document.addEventListener('DOMContentLoaded', function(){
         itemSelector: '.grid-item',
         columnWidth: '.grid-sizer',
         percentPosition: true,
+        transitionDuration: '0.8s',
+        gutter:5
     });
+
+    //在这里没有能够触发on progress事件
     images.forEach(image => {
         const item = document.createElement('div');
         item.className = 'grid-item';
         
         const  img = document.createElement('img');
+        img.src = image.default || image;
+        item.appendChild(img);
         img.onload = function(){
             grid.appendChild(item);
             masonry.appended(item);
-
+            //masonry.layout();
         };
-        img.src = image.default || image;
-        item.appendChild(img);
+        
+        
     });
-    //在这里没有能够触发on progress事件
-    imagesLoaded(grid).on( 'progress', function( instance, image ) {
-        var result = image.isLoaded ? 'loaded' : 'broken';
-        console.log( 'image is ' + result + ' for ' + image.img.src );
-      });
+
+    imagesLoaded(grid).on('done', function(){
+       
+        //console.log(masonry)
+        //masonry.reloadItems();
+        masonry.layout();
+    });
+    
 });
+
+const options = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.1
+}
+const observer = new IntersectionObserver(callback, options);
+function callback(entries, observer){
+    entries.forEach(entry => {
+        if (entry.isIntersecting){
+            loadMoreImages();
+        }
+    });
+}
+
+let target = document.querySelector('.grid');
+observer.observe(target);
+function loadMoreImages(){
+    
+}
+//const grid = document.querySelector('.grid');
