@@ -1,4 +1,4 @@
-import Masonry from "masonry-layout";
+
 import imagesLoaded from "imagesloaded";
 import './public/css/style.css';
 import 'babel-polyfill';
@@ -45,6 +45,7 @@ document.addEventListener('DOMContentLoaded', function(){
     
 });
 
+
 const options = {
     root: null,
     rootMargin: '0px',
@@ -65,3 +66,4 @@ function loadMoreImages(){
     
 }
 //const grid = document.querySelector('.grid');
+
