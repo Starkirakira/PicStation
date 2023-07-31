@@ -1,4 +1,4 @@
-
+import Masonry from 'masonry-layout'
 import imagesLoaded from "imagesloaded";
 import './public/css/style.css';
 import 'babel-polyfill';
