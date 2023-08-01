@@ -21,3 +21,8 @@
     display: block;
     clear: both;
 }
+
+/* notyf */
+.notyf__toast {
+    background-color: rgba(42, 255, 237, 0.475) !important;
+}
