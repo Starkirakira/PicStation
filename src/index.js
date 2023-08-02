@@ -74,8 +74,8 @@ document.body.appendChild(sentinel);
 
 const options = {
     root: null,
-    rootMargin: '100px',
-    threshold: 1.0
+    rootMargin: '0px',
+    threshold: 0.1
 }
 let loaded = false;
 window.addEventListener('load', () => {
@@ -99,10 +99,10 @@ function loadMoreImages(){
         nextEnd = images.length;
     }
     loadImages(currentEnd, nextEnd);
-    if(nextEnd === images.length) {
-            notyf.open({ type: 'info', message: '没有了喵😿' });
-    }
     currentEnd = nextEnd;
+    if(nextEnd === images.length) {
+        notyf.open({ type: 'info', message: '没有了喵😿' });
+}
     isLoading = false;
     
 
