@@ -4,11 +4,39 @@ import './public/css/style.css';
 import 'babel-polyfill';
 import {Notyf} from 'notyf';
 import 'notyf/notyf.min.css';
+import icon from './public/icon/bottom.png';
+import imgBegin from './public/images/longsize begin.jpg';
 
+let link = document.querySelector('link[rel="icon"]');
+if(!link) {
+    link = document.createElement('link');
+    link.rel = 'icon';
+    document.head.appendChild(link);
+}
+link.href = icon;
+
+const grid = document.querySelector('.grid');
+const header = document.createElement('header');
+header.className = 'img-header';
+const h1 = document.createElement('h1');
+h1.textContent = '欢迎来到我的图站';
+const p = document.createElement('p');
+p.textContent = '在这里，你可以浏览到各种精美的图片，希望你喜欢！';
+const img = document.createElement('img');
+img.className = 'begin-img';
 function importAll(r){
     return r.keys().map(r).slice(0,40);
 }
-const grid = document.querySelector('.grid');
+img.src = imgBegin; // 替换为你的图片路径
+img.alt = 'Welcome';
+
+header.appendChild(h1);
+header.appendChild(p);
+header.appendChild(img);
+
+// 在 .grid 元素前插入新创建的 header 元素
+grid.parentNode.insertBefore(header, grid);
+
 const masonry = new Masonry(grid, {
     itemSelector: '.grid-item',
     columnWidth: '.grid-sizer',
@@ -33,9 +61,6 @@ const notyf = new Notyf({
 let currentEnd = 10;
 let isLoading = false;
 function loadImages(sindex, eindex) {
-    
-   
-    
     for (let i = sindex; i < eindex; i++) {
         const image = images[i];
         const item = document.createElement('div');
@@ -100,11 +125,11 @@ function loadMoreImages(){
     }
     loadImages(currentEnd, nextEnd);
     currentEnd = nextEnd;
+   
+    isLoading = false;
     if(nextEnd === images.length) {
         notyf.open({ type: 'info', message: '没有了喵😿' });
 }
-    isLoading = false;
-    
 
 
 }
