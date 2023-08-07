@@ -5,7 +5,8 @@ import 'babel-polyfill';
 import {Notyf} from 'notyf';
 import 'notyf/notyf.min.css';
 import icon from './public/icon/bottom.png';
-import imgBegin from './public/images/longsize begin.jpg';
+import imgBegin1 from './public/images/long_size_nature2.jpg';
+import imgBegin2 from './public/images/long_size_nature1.jpg';
 
 let link = document.querySelector('link[rel="icon"]');
 if(!link) {
@@ -18,20 +19,15 @@ link.href = icon;
 const grid = document.querySelector('.grid');
 const header = document.createElement('header');
 header.className = 'img-header';
-const h1 = document.createElement('h1');
-h1.textContent = '欢迎来到我的图站';
-const p = document.createElement('p');
-p.textContent = '在这里，你可以浏览到各种精美的图片，希望你喜欢！';
 const img = document.createElement('img');
 img.className = 'begin-img';
 function importAll(r){
-    return r.keys().map(r).slice(0,40);
+    return r.keys().map(r).slice(0,20);
 }
-img.src = imgBegin; // 替换为你的图片路径
+const imageArr = [imgBegin1,imgBegin2];
+img.src = imageArr[Math.floor(Math.random()*imageArr.length)]; // 替换为你的图片路径
 img.alt = 'Welcome';
 
-header.appendChild(h1);
-header.appendChild(p);
 header.appendChild(img);
 
 // 在 .grid 元素前插入新创建的 header 元素
