@@ -22,7 +22,7 @@ header.className = 'img-header';
 const img = document.createElement('img');
 img.className = 'begin-img';
 function importAll(r){
-    return r.keys().map(r).slice(0,20);
+    return r.keys().map(r);
 }
 const imageArr = [imgBegin1,imgBegin2];
 img.src = imageArr[Math.floor(Math.random()*imageArr.length)]; // 替换为你的图片路径
@@ -56,6 +56,8 @@ const notyf = new Notyf({
 });
 let currentEnd = 10;
 let isLoading = false;
+
+
 function loadImages(sindex, eindex) {
     for (let i = sindex; i < eindex; i++) {
         const image = images[i];
@@ -108,10 +110,13 @@ const observer = new IntersectionObserver(entries => {
     }
 }, options);
 
-//let target = document.querySelector('.grid');
 observer.observe(sentinel);
 function loadMoreImages(){
     if (isLoading) {
+        return;
+    }
+    if(currentEnd === images.length) {
+            notyf.open({ type: 'info', message: '没有了喵😿' });
         return;
     }
     isLoading = true;
@@ -121,13 +126,8 @@ function loadMoreImages(){
     }
     loadImages(currentEnd, nextEnd);
     currentEnd = nextEnd;
-   
     isLoading = false;
-    if(nextEnd === images.length) {
-        notyf.open({ type: 'info', message: '没有了喵😿' });
-}
-
-
+    
 }
 //const grid = document.querySelector('.grid');
 
