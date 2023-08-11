@@ -31,26 +31,43 @@ def process_imnage(file_path, output_path):
         print(f'Aperture: {aperture}')
         print(f'ISO Speed: {iso_speed}')
     # difine image's border
-    border = (0, 0, 0, 200)
+    border = (0, 0, 0, 400)
     bg_color = (225, 225, 225)
     image_with_border = ImageOps.expand(image, border=border, fill=bg_color)
     draw = ImageDraw.Draw(image_with_border)
+    aperture_paste = Image.open('./public/icon/aperture_line_black.png')
+    new_size = (300, 300)
+    resized_aperture_paste = aperture_paste.resize(new_size)
+    paste_x = int(image.width / 5)
+    paste_y = int(image.height + (border[3] - new_size[1])/2 )
+    image_with_border.paste(resized_aperture_paste, (paste_x, paste_y),
+                            resized_aperture_paste)
+
     text_model = str(model)
     text_lens = str(lens)
-    text_aperture = str(aperture)
-    text_iso = str(iso_speed)
-    text_exposure_time = str(exposure_time)
-
+    text_aperture = 'Aperture: f/' + str(aperture)
+    text_iso = 'ISO: ' + str(iso_speed)
+    text_exposure_time = 'Shutter speed: ' + str(exposure_time)
     # Pick font && size
     # font_size = 16
-    font = ImageFont.truetype('./public/font/AxureHandwriting.ttf', size=40)
-
-    text_position = (border/2, image.height + border/2)
-    draw.text(text_position, text_model, font=font, fill="black")
-    draw.text(text_position, text_lens, font=font, fill="black")
-    draw.text(text_position, text_aperture, font=font, fill="black")
-    draw.text(text_position, text_iso, font=font, fill="black")
-    draw.text(text_position, text_exposure_time, font=font, fill="black")
+    font = ImageFont.truetype('./public/font/AxureHandwriting.ttf', size=60)
+    offset_icon = 40
+    offset = max(font.getlength(text_model), font.getlength(text_lens)) + offset_icon + 40
+    # text_position_1 = (int(image.width / 5 + offset_icon + new_size[0]), int(image.height + border[3]/2 - (border[3] - new_size[1])/2 - 50))
+    # text_position_2 = (int(image.width / 5 + offset_icon + new_size[0]), int(image.height + border[3]/2 + (border[3] - new_size[1])/2 + font.getmetrics()[0] + 50 ))
+    text_position_1 = (int(image.width / 5 + offset_icon + new_size[0]), int(image.height + border[3]/2 - font.getmetrics()[0] - 50))
+    text_position_2 = (int(image.width / 5 + offset_icon + new_size[0]), int(image.height + border[3]/2 + 50))
+    text_position_3 = (int(image.width / 5 + new_size[0] + offset),
+                       int(image.height + border[3] * (1/7)))
+    text_position_4 = (int(image.width / 5 + new_size[0] + offset),
+                       int(image.height + border[3] * (3/7)))
+    text_position_5 = (int(image.width / 5 + new_size[0] + offset),
+                       int(image.height + border[3] * (5/7)))
+    draw.text(text_position_1, text_model, font=font, fill="black")
+    draw.text(text_position_2, text_lens, font=font, fill="black")
+    draw.text(text_position_3, text_aperture, font=font, fill="black")
+    draw.text(text_position_4, text_iso, font=font, fill="black")
+    draw.text(text_position_5, text_exposure_time, font=font, fill="black")
     image_with_border.save(output_path)
 
 
