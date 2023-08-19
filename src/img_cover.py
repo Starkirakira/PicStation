@@ -84,7 +84,7 @@ def process_imnage(file_path, output_path):
     draw.text(text_position_4, text_iso, font=font, fill="black")
     draw.text(text_position_5, text_exposure_time, font=font, fill="black")
     # Convert images from jpeg to webp
-    image_with_border.save(output_path, "WEBP", lossless=True)
+    image_with_border.save(output_path, "WEBP", lossless=False, quality=70)
 
 
 # Use
@@ -102,6 +102,6 @@ for filename in os.listdir(image_directory):
         print(f"Processed {base_name + '.webp'}")
 
 
-# process_imnage("./public/pic/DSC_1564.jpg", "./public/pic/DSC_0091_change.jpg")
-# process_imnage("./public/pic/DSC_0221.jpg", "./public/pic/DSC_0092_change.jpg")
-# process_imnage("./public/pic/DSC_0164.jpg", "./public/pic/DSC_0093_change.jpg")
+# process_imnage("./public/pic/DSC_1564.jpg", "./public/pic/DSC_0091_change.webp")
+# process_imnage("./public/pic/DSC_0221.jpg", "./public/pic/DSC_0092_change.webp")
+# process_imnage("./public/pic/DSC_0164.jpg", "./public/pic/DSC_0093_change.webp")

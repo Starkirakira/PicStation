@@ -40,7 +40,7 @@ const masonry = new Masonry(grid, {
     transitionDuration: '0.8s',
     gutter:5
 });
-const images = importAll(require.context('./public/pic', false, /\.(jpe?g|png|gif)$/));
+const images = importAll(require.context('./public/picWebP', false, /\.(jpe?g|png|gif|webp)$/));
 const notyf = new Notyf({
     duration: 5000,
     position: {
@@ -116,7 +116,7 @@ function loadMoreImages(){
         return;
     }
     if(currentEnd === images.length) {
-            notyf.open({ type: 'info', message: '没有了喵😿' });
+            notyf.open({ type: 'info', message: 'No More Nya😿' });
         return;
     }
     isLoading = true;
