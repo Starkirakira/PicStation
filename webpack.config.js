@@ -1,13 +1,13 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { CleanPlugin } = require('webpack');
+const webpack = require('webpack');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 module.exports = {
   mode: 'development',
   entry: path.join(__dirname, 'src', 'index'),
   output: {
     path: path.join(__dirname, 'dist'),
-    publicPath: '/dist/',
+    publicPath: '/PicStation/',
     filename: "bundle.js",
     chunkFilename: '[name].js'
   },
@@ -60,7 +60,10 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
-    new CleanWebpackPlugin(),
+    //new CleanWebpackPlugin(),
+    new webpack.IgnorePlugin({
+      resourceRegExp: /src\/public\/pic/
+    }),
   ],
   devtool: 'source-map',
   devServer: {
