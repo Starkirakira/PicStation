@@ -60,7 +60,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './src/index.html'
     }),
-    //new CleanWebpackPlugin(),
+    new CleanWebpackPlugin(),
     new webpack.IgnorePlugin({
       resourceRegExp: /src\/public\/pic/
     }),
